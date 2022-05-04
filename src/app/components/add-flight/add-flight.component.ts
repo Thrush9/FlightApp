@@ -56,6 +56,7 @@ export class AddFlightComponent implements OnInit {
       businessSeats: ['', Validators.required],
       nonBusinessSeats: ['', Validators.required],
       totalRows: ['', Validators.required],
+      instrument: ['', Validators.required],
       meal: [true],
       veg: [true]
     });
@@ -72,8 +73,6 @@ export class AddFlightComponent implements OnInit {
   }
 
   onSubmit() {
-    console.log(this.firstFormGroup.value);
-    console.log(this.secondFormGroup.value);
     let flight: Flight = {
       ...this.firstFormGroup.value
       , ...this.secondFormGroup.value,
@@ -81,9 +80,9 @@ export class AddFlightComponent implements OnInit {
     console.log(flight);
     let start = this.convert(flight.startDate);
     let end = this.convert(flight.endDate);
-    this.flightService.scheduleFlight(flight, start, end).subscribe(
+    this.flightService.scheduleFlight(flight).subscribe(
       (res) => {
-        let msg1 = `${res.name} Airlines Registration Succesful!`;
+        let msg1 = `${res.flightNo} Flight Scheduled Succesfully!`;
         this.snackbar.open(msg1, 'OK', { duration: 5000 });
       },
       (err) => {

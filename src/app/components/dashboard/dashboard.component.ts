@@ -31,7 +31,6 @@ export class DashboardComponent implements OnInit {
     this.email = userDetails.email;
     this.role = userDetails.role[0];
     this.checkRoleAndPath();
-    console.log(this.checkRoleAndPath());
   }
 
   ngAfterViewInit() {

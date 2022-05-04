@@ -1,6 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { AdminDashboardComponent } from './admin-dashboard.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 describe('AdminDashboardComponent', () => {
   let component: AdminDashboardComponent;
@@ -8,9 +11,10 @@ describe('AdminDashboardComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AdminDashboardComponent ]
+      declarations: [AdminDashboardComponent],
+      imports: [RouterTestingModule, HttpClientTestingModule, MatSnackBarModule, NgxPaginationModule]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

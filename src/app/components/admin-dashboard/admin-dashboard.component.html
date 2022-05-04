@@ -86,8 +86,8 @@
             <th scope="col" class="text-center">Flight No</th>
             <th scope="col" class="text-center">From</th>
             <th scope="col" class="text-center">To</th>
-            <th scope="col" class="text-center">Start Date - Time</th>
-            <th scope="col" class="text-center">End Date - Time</th>
+            <th scope="col" class="text-center">Start Date</th>
+            <th scope="col" class="text-center">End Date</th>
             <th scope="col" class="text-center">availability</th>
           </tr>
         </thead>
@@ -96,8 +96,8 @@
             <td scope="col" class="text-center">{{data.flightNo}}</td>
             <td scope="col" class="text-center">{{data.fromPlace}}</td>
             <td scope="col" class="text-center">{{data.toPlace}}</td>
-            <td scope="col" class="text-center">{{data.startDate | date:'medium'}}</td>
-            <td scope="col" class="text-center">{{data.endDate | date:'medium'}}</td>
+            <td scope="col" class="text-center">{{data.startDate | date:'fullDate'}}</td>
+            <td scope="col" class="text-center">{{data.endDate | date:'fullDate'}}</td>
             <td scope="col" class="text-center">{{data.availability}}</td>
           </tr>
         </tbody>

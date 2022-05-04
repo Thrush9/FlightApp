@@ -22,6 +22,8 @@ import { MatStepperModule } from '@angular/material/stepper';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { MatSelectModule } from '@angular/material/select';
+import { MatTabsModule } from '@angular/material/tabs';
+import { MatListModule } from '@angular/material/list';
 import { NgxPaginationModule } from 'ngx-pagination';
 
 
@@ -35,6 +37,8 @@ import { AddAirlinesComponent } from './components/add-airlines/add-airlines.com
 import { AddFlightComponent } from './components/add-flight/add-flight.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
+import { BookingHistoryComponent } from './components/booking-history/booking-history.component';
+import { BookingStatusComponent } from './components/booking-status/booking-status.component';
 
 @NgModule({
   declarations: [
@@ -48,7 +52,9 @@ import { UserDashboardComponent } from './components/user-dashboard/user-dashboa
     AddAirlinesComponent,
     AddFlightComponent,
     AdminDashboardComponent,
-    UserDashboardComponent
+    UserDashboardComponent,
+    BookingHistoryComponent,
+    BookingStatusComponent
   ],
   imports: [
     BrowserModule,
@@ -70,6 +76,8 @@ import { UserDashboardComponent } from './components/user-dashboard/user-dashboa
     MatStepperModule,
     MatDatepickerModule,
     MatNativeDateModule,
+    MatTabsModule,
+    MatListModule,
     MatExpansionModule,
     MatCardModule,
     MatSnackBarModule,

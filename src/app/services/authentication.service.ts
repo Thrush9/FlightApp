@@ -7,14 +7,17 @@ import { User } from '../models/User';
 })
 export class AuthenticationService {
 
+  //flightService:string = 'http://localhost:8085';
+  flightServiceAPI: string = 'http://localhost:8765/FlightService';
+
   constructor(private http: HttpClient) { }
 
   validateUser(data: User) {
-    return this.http.post('http://localhost:8085/api/v1.0/flight/login', data);
+    return this.http.post(this.flightServiceAPI + '/api/v1.0/flight/login', data);
   }
 
   registerUser(data: User) {
-    return this.http.post('http://localhost:8085/api/v1.0/flight/signup', data, { reportProgress: true, responseType: 'text' });
+    return this.http.post(this.flightServiceAPI + '/api/v1.0/flight/signup', data, { reportProgress: true, responseType: 'text' });
   }
 
   setBearertoken(token: string) {

@@ -9,6 +9,8 @@ import { AddAirlinesComponent } from './components/add-airlines/add-airlines.com
 import { AddFlightComponent } from './components/add-flight/add-flight.component';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
+import { BookingHistoryComponent } from './components/booking-history/booking-history.component';
+import { BookingStatusComponent } from './components/booking-status/booking-status.component';
 import { LandingPageGuard } from './guards/landingpage.guard';
 
 const routes: Routes = [
@@ -47,6 +49,16 @@ const routes: Routes = [
       {
         path: 'user',
         component: UserDashboardComponent,
+        canActivate: [LandingPageGuard]
+      },
+      {
+        path: 'bookingStatus',
+        component: BookingStatusComponent,
+        canActivate: [LandingPageGuard]
+      },
+      {
+        path: 'bookingHistory',
+        component: BookingHistoryComponent,
         canActivate: [LandingPageGuard]
       },
     ]

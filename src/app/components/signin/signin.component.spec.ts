@@ -1,6 +1,8 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { SigninComponent } from './signin.component';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 describe('SigninComponent', () => {
   let component: SigninComponent;
@@ -8,9 +10,10 @@ describe('SigninComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SigninComponent ]
+      declarations: [SigninComponent],
+      imports: [RouterTestingModule, HttpClientTestingModule, MatSnackBarModule]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {

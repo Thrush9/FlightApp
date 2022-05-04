@@ -1,0 +1,114 @@
+<div class="container p-2">
+
+  <div class="p-2">
+    <h2 class="m-0 fs-3 text-center text-white">Booking History</h2>
+    <mat-divider class="my-2 bkg-primary"></mat-divider>
+    <div class="table-responsive">
+      <table class="table table-borderless table-striped table-hover airlinesTable">
+        <thead class="thead-dark">
+          <tr>
+            <th scope="col" class="text-center">Name</th>
+            <th scope="col" class="text-center">PNR</th>
+            <th scope="col" class="text-center">Email</th>
+            <th scope="col" class="text-center">TotalSeats</th>
+            <th scope="col" class="text-center">meal</th>
+            <th scope="col" class="text-center">status</th>
+            <th scope="col" class="text-center"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let data of bookingsData | paginate: { id: 'pagination',itemsPerPage: 5, currentPage: p}">
+            <td scope="col" class="text-center">{{data.name}}</td>
+            <td scope="col" class="text-center">{{data.pnr}}</td>
+            <td scope="col" class="text-center">{{data.email}}</td>
+            <td scope="col" class="text-center">{{data.totalSeats}}</td>
+            <td scope="col" class="text-center">{{data.meal ? 'Marked' : 'Not Marked'}}</td>
+            <td scope="col" class="text-center">{{data.status ? 'Active': 'Canceled'}}</td>
+            <td scope="col" class="text-center">
+              <button mat-raised-button color="accent" (click)="loadBookingDetails(data)">view Details</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+  <div class="text-decoration-none d-flex justify-content-end p-2 ">
+    <pagination-controls id="pagination" (pageChange)="p = $event" previousLabel="Prev" nextLabel="Next"></pagination-controls>
+  </div>
+
+  <section class=" text-center d-flex justify-content-center">
+    <div class="card col-lg-10 col-md-10 col-sm-12 register" *ngIf="showDetails">
+      <div class="row g-0 d-flex align-items-center">
+        <div class="col-lg-12 col-md-12 col-sm-12 p-2">
+          <div class="card-body d-flex flex-column justify-content-center">
+            <h2 class="text-center fs-5">Flight Booking Details</h2>
+            <mat-divider class="my-2 bkg-primary"></mat-divider>
+            <mat-tab-group mat-align-tabs="start" color="primary">
+              <mat-tab label="Booking Info" class="bkg-primary ">
+                <div class="row rounded signup-btn p-4">
+                  <div class="col-lg-6 col-md-6 col-sm-12 d-flex flex-column justify-content-center align-itmes-center ">
+                    <p class="fs-6">Name : {{this.bookingDetails.name}}</p>
+                    <p>Email : {{this.bookingDetails.email}}</p>
+                    <p>PNR : {{this.bookingDetails.pnr}}</p>
+                    <p>Total Seats : {{this.bookingDetails.totalSeats}}</p>
+                    <p>Meals Required : {{this.bookingDetails.meal}}</p>
+                    <p>status : {{this.bookingDetails.status ? 'Booked':'Canceled'}}</p>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12">
+                    <mat-list>
+                      <div mat-subheader>Passengers</div>
+                      <mat-list-item *ngFor="let passenger of this.bookingDetails.passengers">
+                        <mat-icon mat-list-icon>folder</mat-icon>
+                        <div mat-line>{{passenger.name}}</div>
+                        <div mat-line>{{passenger.gender}} - {{passenger.age}}</div>
+                      </mat-list-item>
+                      <mat-divider></mat-divider>
+                      <div mat-subheader>Seats</div>
+                      <mat-list-item *ngFor="let seat of this.bookingDetails.seats">
+                        <mat-icon mat-list-icon>note</mat-icon>
+                        <div mat-line>{{seat.name}}</div>
+                      </mat-list-item>
+                    </mat-list>
+                  </div>
+                </div>
+              </mat-tab>
+              <mat-tab label="Flight Info" class="bkg-primary ">
+                <div class="row rounded signup-btn p-4">
+                  <div class="col-lg-6 col-md-6 col-sm-12 d-flex flex-column justify-content-center align-itmes-center ">
+                    <p class="fs-6">Flight No : {{this.flightDetails.flightNo}}</p>
+                    <p>From Place : {{this.flightDetails.fromPlace}}</p>
+                    <p>To Place : {{this.flightDetails.toPlace}}</p>
+                    <p>Start Date : {{this.flightDetails.startDate | date: 'fullDate'}}</p>
+                    <p>End Date : {{this.flightDetails.endDate | date: 'fullDate'}}</p>
+                    <p>Instrument : {{this.flightDetails.instrument}}</p>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12 d-flex flex-column justify-content-center align-itmes-center">
+                    <p class="fs-6">Cost: {{this.flightDetails.cost}}</p>
+                    <p>Availability: {{this.flightDetails.availability}}</p>
+                    <p>Total Rows: {{this.flightDetails.totalRows}}</p>
+                    <p>Business Seats: {{this.flightDetails.businessSeats}}</p>
+                    <p>Non-Business Seats: {{this.flightDetails.nonBusinessSeats}}</p>
+                    <p>Meals : {{this.flightDetails.meal}}</p>
+                    <p>Veg / Non Veg : {{this.flightDetails.veg ? 'Veg': 'Non-Veg'}}</p>
+                  </div>
+                </div>
+              </mat-tab>
+              <mat-tab label="Airlines Info">
+                <div class="row rounded signup-btn p-4">
+                  <div class="col-lg-12 col-md-12 col-sm-12 d-flex flex-column justify-content-center align-itmes-center ">
+                    <p class="fs-6">Name: {{this.airlinesDetails.name}}</p>
+                    <p>POC Name : {{this.airlinesDetails.poc}}</p>
+                    <p>POC Eamil : {{this.airlinesDetails.email}}</p>
+                    <p>POC Contact : {{this.airlinesDetails.contact || '-'}}</p>
+                    <p>Address : {{this.airlinesDetails.address || '-'}}</p>
+                    <p>Status : {{this.airlinesDetails.enabled ? 'Active' : 'Inactive'}}</p>
+                  </div>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

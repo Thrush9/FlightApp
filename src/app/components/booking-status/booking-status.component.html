@@ -1,0 +1,106 @@
+<div class="container p-2">
+
+  <section class=" text-center d-flex justify-content-center p-2">
+    <div class="card col-lg-6 col-md-6 col-sm-12 register">
+      <div class="row g-0 d-flex align-items-center">
+        <div class="col-lg-12 col-md-12 col-sm-12 p-2">
+          <div class="card-body d-flex flex-column justify-content-center">
+            <h2 class="text-center fs-5">Search Booking Details</h2>
+            <mat-divider class="my-2 bkg-primary"></mat-divider>
+            <form [formGroup]="searchForm">
+              <mat-form-field appearance="outline" class="col-lg-6 col-md-6 col-sm-12 mb-2">
+                <mat-label>Search PNR</mat-label>
+                <input type="text" matInput placeholder="Enter PNR Number" formControlName="pnr" required>
+                <mat-icon matSuffix>assignment</mat-icon>
+                <mat-error class="text-center" *ngIf="pnr.touched || pnr.dirty">
+                  <strong>PNR is required</strong>
+                </mat-error>
+              </mat-form-field>
+            </form>
+            <div class="buttons mb-3">
+              <button mat-raised-button class="ms-2 me-2" color="primary" [disabled]="!searchForm.valid" (click)="onSubmit()">Search</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class=" text-center d-flex justify-content-center">
+    <div class="card col-lg-10 col-md-10 col-sm-12 register" *ngIf="showDetails">
+      <div class="row g-0 d-flex align-items-center">
+        <div class="col-lg-12 col-md-12 col-sm-12 p-2">
+          <div class="card-body d-flex flex-column justify-content-center">
+            <h2 class="text-center fs-5">Flight Booking Details</h2>
+            <mat-divider class="my-2 bkg-primary"></mat-divider>
+            <mat-tab-group mat-align-tabs="start" color="primary">
+              <mat-tab label="Booking Info" class="bkg-primary ">
+                <div class="row rounded signup-btn p-4">
+                  <div class="col-lg-6 col-md-6 col-sm-12 d-flex flex-column justify-content-center align-itmes-center ">
+                    <p class="fs-6">Name : {{this.bookingDetails.name}}</p>
+                    <p>Email : {{this.bookingDetails.email}}</p>
+                    <p>PNR : {{this.bookingDetails.pnr}}</p>
+                    <p>Total Seats : {{this.bookingDetails.totalSeats}}</p>
+                    <p>Meals Required : {{this.bookingDetails.meal}}</p>
+                    <p>status : {{this.bookingDetails.status ? 'Booked':'Canceled'}}</p>
+                    <button *ngIf="this.bookingDetails.status" mat-raised-button color="primary" (click)="cancelBooking(this.bookingDetails)">Cancel
+                      Booking</button>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12">
+                    <mat-list>
+                      <div mat-subheader>Passengers</div>
+                      <mat-list-item *ngFor="let passenger of this.bookingDetails.passengers">
+                        <mat-icon mat-list-icon>folder</mat-icon>
+                        <div mat-line>{{passenger.name}}</div>
+                        <div mat-line>{{passenger.gender}} - {{passenger.age}}</div>
+                      </mat-list-item>
+                      <mat-divider></mat-divider>
+                      <div mat-subheader>Seats</div>
+                      <mat-list-item *ngFor="let seat of this.bookingDetails.seats">
+                        <mat-icon mat-list-icon>note</mat-icon>
+                        <div mat-line>{{seat.name}}</div>
+                      </mat-list-item>
+                    </mat-list>
+                  </div>
+                </div>
+              </mat-tab>
+              <mat-tab label="Flight Info" class="bkg-primary ">
+                <div class="row rounded signup-btn p-4">
+                  <div class="col-lg-6 col-md-6 col-sm-12 d-flex flex-column justify-content-center align-itmes-center ">
+                    <p class="fs-6">Flight No : {{this.flightDetails.flightNo}}</p>
+                    <p>From Place : {{this.flightDetails.fromPlace}}</p>
+                    <p>To Place : {{this.flightDetails.toPlace}}</p>
+                    <p>Start Date : {{this.flightDetails.startDate | date: 'fullDate'}}</p>
+                    <p>End Date : {{this.flightDetails.endDate | date: 'fullDate'}}</p>
+                    <p>Instrument: {{this.flightDetails.instrument}}</p>
+                  </div>
+                  <div class="col-lg-6 col-md-6 col-sm-12 d-flex flex-column justify-content-center align-itmes-center">
+                    <p class="fs-6">Cost: {{this.flightDetails.cost}}</p>
+                    <p>Availability: {{this.flightDetails.availability}}</p>
+                    <p>Total Rows: {{this.flightDetails.totalRows}}</p>
+                    <p>Business Seats: {{this.flightDetails.businessSeats}}</p>
+                    <p>Non-Business Seats: {{this.flightDetails.nonBusinessSeats}}</p>
+                    <p>Meals : {{this.flightDetails.meal}}</p>
+                    <p>Veg / Non-Veg : {{this.flightDetails.veg? 'Veg': 'Non-Veg'}}</p>
+                  </div>
+                </div>
+              </mat-tab>
+              <mat-tab label="Airlines Info">
+                <div class="row rounded signup-btn p-4">
+                  <div class="col-lg-12 col-md-12 col-sm-12 d-flex flex-column justify-content-center align-itmes-center ">
+                    <p class="fs-6">Name: {{this.airlinesDetails.name}}</p>
+                    <p>POC Name : {{this.airlinesDetails.poc}}</p>
+                    <p>POC Eamil : {{this.airlinesDetails.email}}</p>
+                    <p>POC Contact : {{this.airlinesDetails.contact || '-'}}</p>
+                    <p>Address : {{this.airlinesDetails.address || '-'}}</p>
+                    <p>Status : {{this.airlinesDetails.enabled ? 'Active' : 'Inactive'}}</p>
+                  </div>
+                </div>
+              </mat-tab>
+            </mat-tab-group>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>

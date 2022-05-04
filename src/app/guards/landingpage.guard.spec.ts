@@ -1,13 +1,16 @@
 import { TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
+import { LandingPageGuard } from './landingpage.guard';
 
-import { LandingpageGuard } from './landingpage.guard';
-
-describe('LandingpageGuard', () => {
-  let guard: LandingpageGuard;
+describe('LandingPageGuard', () => {
+  let guard: LandingPageGuard;
 
   beforeEach(() => {
-    TestBed.configureTestingModule({});
-    guard = TestBed.inject(LandingpageGuard);
+    TestBed.configureTestingModule({
+      imports: [RouterTestingModule, HttpClientTestingModule]
+    });
+    guard = TestBed.inject(LandingPageGuard);
   });
 
   it('should be created', () => {
